@@ -83,13 +83,36 @@ class Map:
                 node.setNode(direction,newNode)
 
             toRemove -= 1
+        
+    
 
     # Verify that all nodes are accessible on the map
     # If not, remove an offending wall and try again
 
-    # TODO: run this function of all nodes?
+    # TODO: run this function on all nodes?
     def verify(self):
+        startNode = self.nodelist[0][0]
+        startNode.valid = True
+
+        def verifyNode(node):
+            for node in node.getNeighbors():
+                if node.valid:
+                    continue
+                node.valid = True
+                verifyNode(node)
+                
+        verifyNode(startNode)
+
+        # TODO: remove an offending wall
+        
+        print("All nodes valid")
         return
+
+    # Set all nodes to invalid (False) reachable state
+    def setInvalid(self):
+        for row in self.nodelist:
+            for node in row:
+                node.valid = False
 
     # Draw the map in tkinter
     def draw(self):

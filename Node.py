@@ -41,5 +41,20 @@ class Node:
         else:
             print("Incorrect set number")
 
+    def getNeighbors(self):
+        neighbors = []
+
+        if self.top:
+            neighbors.append(self.top)
+        if self.bottom:
+            neighbors.append(self.bottom)
+        if self.left:
+            neighbors.append(self.left)
+        if self.right:
+            neighbors.append(self.right)
+
+        return neighbors
+        
+
 
     
