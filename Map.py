@@ -41,14 +41,15 @@ class Map:
     # numwalls is number of walls to leave up
     def setWalls(self, numwalls):
         # thus, the amount of walls to remove is the total - the number we want remaining
-        # where the total number of walls is sidelength * (sidelength + 1)
+        # where the total number of walls is 2 * sidelength * sidelength
         # note that top walls are the same walls as bottom walls; same with left/right
         l = self.sidelength
-        toRemove = (l * (l+1)) - numwalls
+        toRemove = 2 * l * l - numwalls
 
         # very inefficient -- instead of only selecting possible walls, we guess blindly
         # will take exponentially longer the more we have to remove
         while toRemove != 0:
+
             i = randint(0,self.sidelength - 1)
             j = randint(0,self.sidelength - 1)
             direction = randint(0,3)
@@ -81,7 +82,6 @@ class Map:
                 newNode = self.nodelist[i][(j+1) % self.sidelength]
                 node.setNode(direction,newNode)
 
-            #print(toRemove)
             toRemove -= 1
 
     # Verify that all nodes are accessible on the map
