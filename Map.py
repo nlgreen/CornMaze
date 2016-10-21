@@ -34,16 +34,19 @@ class Map:
         return False
 
     # Create a closed, grid map -- no nodes connect to any others
-    def initalizeMap(self):
-        for i in range(sideLength * sideLength):
+    def init(self):
+        for i in range(self.sidelength * self.sidelength):
             self.addNode(Node.Node())
 
     # numwalls is number of walls to leave up
-    def setMap(self, numwalls):
+    def setWalls(self, numwalls):
         # thus, the amount of walls to remove is the total - the number we want remaining
-        toRemove = (self.sidelength * self.sidelength) - numwalls
+        # where the total number of walls is sidelength * (sidelength + 1)
+        # note that top walls are the same walls as bottom walls; same with left/right
+        l = self.sidelength
+        toRemove = (l * (l+1)) - numwalls
 
-        # very inefficient -- instead of only selecting possible walls, we blindly attempt
+        # very inefficient -- instead of only selecting possible walls, we guess blindly
         # will take exponentially longer the more we have to remove
         while toRemove != 0:
             i = randint(0,self.sidelength - 1)
@@ -73,22 +76,23 @@ class Map:
                 node.setNode(direction,newNode)
 
             elif direction == 3:
-                if node.left:
+                if node.right:
                     continue
                 newNode = self.nodelist[i][(j+1) % self.sidelength]
                 node.setNode(direction,newNode)
-            
+
+            #print(toRemove)
             toRemove -= 1
 
     # Verify that all nodes are accessible on the map
     # If not, remove an offending wall and try again
 
     # TODO: run this function of all nodes?
-    def verifyMap(self):
+    def verify(self):
         return
 
     # Draw the map in tkinter
-    def drawMap(self):
+    def draw(self):
 
         master = Tk()
 
