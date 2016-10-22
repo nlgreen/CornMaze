@@ -57,6 +57,9 @@ class Map:
             if(self.removeRandomWall(i,j)):
                 toRemove -= 1
 
+
+    # Given an index into the nodelist, return a random wall from the node
+    # If impossible (the node is open), return False
     def removeRandomWall(self,i,j):
         direction = randint(0,3)
         
@@ -93,22 +96,25 @@ class Map:
 
     # Verify that all nodes are accessible on the map
     # If not, remove an offending wall and try again
-
-    # TODO: run this function on all nodes?
     def verify(self):
         self.setInvalid()
         startNode = self.nodelist[0][0]
         startNode.valid = True
 
+        # Recursive function to verify for a node and all its neighbors
         def verifyNode(node):
             for node in node.getNeighbors():
                 if node.valid:
                     continue
                 node.valid = True
                 verifyNode(node)
-                
+
+        # start at a given node and search
         verifyNode(startNode)
 
+        # ensure that the map has no invalid (unreachable) nodes
+        # if it has one, remove a random wall of the first invalid
+        # node we find
         def freeMap(self):
             for i in range(0,self.sidelength):
                 for j in range(0,self.sidelength):
@@ -120,9 +126,11 @@ class Map:
                         return True
             return False
 
+        # If we found a false node, we have to re-verify with fixed version
         if(freeMap(self)):
             self.verify()
-                
+
+        # otherwise there are no unreachable nodes
         
         return
 
