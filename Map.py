@@ -52,38 +52,43 @@ class Map:
 
             i = randint(0,self.sidelength - 1)
             j = randint(0,self.sidelength - 1)
-            direction = randint(0,3)
-            
-            node = self.nodelist[i][j]
-            
-            # if the chosen direction is already a node, can't remove the wall there
-            # otherwise we add the appropriate node connection
-            if direction == 0:
-                if node.top:
-                    continue
-                newNode = self.nodelist[(i-1) % self.sidelength][j]
-                node.setNode(direction,newNode)
 
-            elif direction == 1:
-                if node.bottom:
-                    continue
-                newNode = self.nodelist[(i+1) % self.sidelength][j]
-                node.setNode(direction,newNode)
 
-            elif direction == 2:
-                if node.left:
-                    continue
-                newNode = self.nodelist[i][(j-1) % self.sidelength]
-                node.setNode(direction,newNode)
+            if(self.removeRandomWall(i,j)):
+                toRemove -= 1
 
-            elif direction == 3:
-                if node.right:
-                    continue
-                newNode = self.nodelist[i][(j+1) % self.sidelength]
-                node.setNode(direction,newNode)
-
-            toRemove -= 1
+    def removeRandomWall(self,i,j):
+        direction = randint(0,3)
         
+        node = self.nodelist[i][j]
+        
+        # if the chosen direction is already a node, can't remove the wall there
+        # otherwise we add the appropriate node connection
+        if direction == 0:
+            if node.top:
+                return False
+            newNode = self.nodelist[(i-1) % self.sidelength][j]
+            node.setNode(direction,newNode)
+            
+        elif direction == 1:
+            if node.bottom:
+                return False
+            newNode = self.nodelist[(i+1) % self.sidelength][j]
+            node.setNode(direction,newNode)
+                
+        elif direction == 2:
+            if node.left:
+                return False
+            newNode = self.nodelist[i][(j-1) % self.sidelength]
+            node.setNode(direction,newNode)
+
+        elif direction == 3:
+            if node.right:
+                return False
+            newNode = self.nodelist[i][(j+1) % self.sidelength]
+            node.setNode(direction,newNode)
+
+        return True
     
 
     # Verify that all nodes are accessible on the map
@@ -91,6 +96,7 @@ class Map:
 
     # TODO: run this function on all nodes?
     def verify(self):
+        self.setInvalid()
         startNode = self.nodelist[0][0]
         startNode.valid = True
 
@@ -103,9 +109,21 @@ class Map:
                 
         verifyNode(startNode)
 
-        # TODO: remove an offending wall
+        def freeMap(self):
+            for i in range(0,self.sidelength):
+                for j in range(0,self.sidelength):
+                    print(self.nodelist[i][j].valid)
+                    if not self.nodelist[i][j].valid:
+                        success = False
+                        while not success:
+                            success = self.removeRandomWall(i,j)
+                        return True
+            return False
+
+        if(freeMap(self)):
+            self.verify()
+                
         
-        print("All nodes valid")
         return
 
     # Set all nodes to invalid (False) reachable state
@@ -119,8 +137,8 @@ class Map:
 
         master = Tk()
 
-        canvas_width = self.sidelength * 100 + 100
-        canvas_height = self.sidelength * 100 + 100
+        canvas_width = self.sidelength * 100 + 20
+        canvas_height = self.sidelength * 100 + 20
 
         w = Canvas(master,
                    width = canvas_width,
@@ -128,11 +146,11 @@ class Map:
         w.pack()
 
 
-        height = 50
+        height = 10
 
         # draw walls for each node -- walls technically overlap
         for row in self.nodelist:
-            width = 50
+            width = 10
             for node in row:
                 if not node:
                     continue
