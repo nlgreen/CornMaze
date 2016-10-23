@@ -20,6 +20,8 @@ class Node:
         self.left = None
 
         self.valid = False
+
+        self.player = None
     
     def __str__(self):
         return "Node"
@@ -43,6 +45,18 @@ class Node:
         else:
             print("Incorrect set number")
 
+
+    def getNeighbor(self,direction):
+        if direction == Direct.TOP:
+            return self.top
+        elif direction == Direct.BOTTOM:
+            return self.bottom
+        elif direction == Direct.LEFT:
+            return self.left
+        elif direction == Direct.RIGHT:
+            return self.right
+
+
     def getNeighbors(self):
         neighbors = []
 
@@ -58,5 +72,9 @@ class Node:
         return neighbors
         
 
+    def hasPlayer(self):
+        return bool(self.player)
 
+    def getPlayer(self):
+        return self.player
     
