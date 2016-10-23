@@ -10,7 +10,7 @@ from random import randint
 import node
 from tkinter import *
 from direction import Direction as Direct
-
+import player
 
 class Map:
     def __init__(self,sidelength=6):
@@ -142,6 +142,15 @@ class Map:
             for node in row:
                 node.valid = False
 
+
+    def setRandomPlayer(self):
+        i = randint(0,self.sidelength - 1)
+        j = randint(0,self.sidelength - 1)
+
+        player = player.Player(player.getRandomName())
+        player.location = self.nodelist[i][j]
+        self.nodelist[i][j] = player
+
     # Draw the map in tkinter
     def draw(self):
 
@@ -172,6 +181,10 @@ class Map:
                     w.create_line(width,height,width,height+100)
                 if not node.right:
                     w.create_line(width+100,height,width+100,height+100)
+
+                if node.player:
+                    w.create_oval(width,height,width+100,height+100)
+
                 width += 100
             height += 100
 
