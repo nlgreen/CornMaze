@@ -14,7 +14,7 @@ class Player:
         while node.getNeighbor(direction):
             node = node.getNeighbor(direction)
             if node.hasPlayer():
-                player = node.getPlayer():
+                player = node.getPlayer()
                 player.die()
     
     def die(self):

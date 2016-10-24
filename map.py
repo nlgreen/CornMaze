@@ -120,7 +120,6 @@ class Map:
         def freeMap(self):
             for i in range(0,self.sidelength):
                 for j in range(0,self.sidelength):
-                    print(self.nodelist[i][j].valid)
                     if not self.nodelist[i][j].valid:
                         success = False
                         while not success:
