@@ -4,7 +4,8 @@ Written on 10-19-2016 by Nathaniel Green
 A Node class for a CornMaze game. Every Node has a top,
 bottom, left, and right that will be other None in the case
 of a wall and a Node if there is a connection. Nodes are
-valid if they are accessible on the map.
+valid if they are accessible on the map. Nodes may or may
+not have a player attached to them.
 
 TODO: Input checking
 
