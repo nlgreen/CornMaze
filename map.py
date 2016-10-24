@@ -19,6 +19,7 @@ class Map:
         # All nodes are initialized as None, to be replaced with Nodes
         self.nodelist = [[None for i in range(0,sidelength)] for j in range(0,sidelength)]
         self.sidelength = sidelength
+        self.thePlayer = None
 
     def __str__(self):
         stringy = ""
@@ -152,7 +153,9 @@ class Map:
         thePlayer = player.Player(player.getRandomName())
         thePlayer.location = self.nodelist[i][j]
         self.nodelist[i][j].player = thePlayer
+        self.thePlayer = thePlayer
 
+        
         return thePlayer
 
     # Draw the map in tkinter
@@ -166,9 +169,38 @@ class Map:
         w = Canvas(master,
                    width = canvas_width,
                    height = canvas_width)
+
+        
         w.pack()
 
 
+        def up():
+            if self.thePlayer.moveUp():
+                master.destroy()
+                self.draw()
+        def down():
+            if self.thePlayer.moveDown():
+                master.destroy()
+                self.draw()
+        def left():
+            if self.thePlayer.moveLeft():
+                master.destroy()
+                self.draw()
+        def right():
+            if self.thePlayer.moveRight():
+                master.destroy()
+                self.draw()
+            
+        u = Button(master,text="Up",command=up)
+        d = Button(master,text="Down",command=down)
+        l = Button(master,text="Left",command=left)
+        r = Button(master,text="Right",command=right)
+        u.pack()
+        d.pack()
+        l.pack()
+        r.pack()
+
+        
         height = 10
 
         # draw walls for each node -- walls technically overlap
@@ -192,4 +224,5 @@ class Map:
                 width += 100
             height += 100
 
+            
         mainloop()

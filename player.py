@@ -43,6 +43,7 @@ class Player:
         self.location.player = None
         self.location = self.location.top
         self.location.player = self
+        return True
 
     def moveDown(self):
         if not self.location.bottom:
@@ -51,7 +52,8 @@ class Player:
         self.location.player = None
         self.location = self.location.bottom
         self.location.player = self
-
+        return True
+        
     def moveLeft(self):
         if not self.location.left:
             printFail()
@@ -59,7 +61,8 @@ class Player:
         self.location.player = None
         self.location = self.location.left
         self.location.player = self
-
+        return True
+        
     def moveRight(self):
         if not self.location.right:
             printFail()
@@ -67,7 +70,7 @@ class Player:
         self.location.player = None
         self.location = self.location.right
         self.location.player = self
-
+        return True
 
 
 def printFail():
