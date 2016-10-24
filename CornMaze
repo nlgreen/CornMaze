@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+
+
+import map
+
+
+def main():
+    theMap = map.Map()
+    theMap.init()
+    theMap.setWalls(25)
+    theMap.verify()
+    p1 = theMap.setRandomPlayer()
+    theMap.draw()
+
+
+
+if __name__ == "__main__":
+    main()
