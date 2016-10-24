@@ -78,7 +78,7 @@ class Node:
     def getPlayer(self):
         return self.player
     
-    def addPlayer(self,player):
-        self.player = player
+    def addPlayer(self,thePlayer):
+        self.player = thePlayer
 
     

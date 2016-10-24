@@ -14,8 +14,8 @@ class Player:
         while node.getNeighbor(direction):
             node = node.getNeighbor(direction)
             if node.hasPlayer():
-                player = node.getPlayer()
-                player.die()
+                thePlayer = node.getPlayer()
+                thePlayer.die()
     
     def die(self):
         print("Player: {} has died!".format(self.name))
@@ -23,20 +23,20 @@ class Player:
 
     # All move functions will need to be updated for nodes hosting multiple players
     def moveUp(self):
-        if not self.location.up:
+        if not self.location.top:
             printFail()
             return False
         self.location.player = None
-        self.location = self.location.up
-        self.location.player = player
+        self.location = self.location.top
+        self.location.player = self
 
     def moveDown(self):
-        if not self.location.down:
+        if not self.location.bottom:
             printFail()
             return False
         self.location.player = None
-        self.location = self.location.down
-        self.location.player = player
+        self.location = self.location.bottom
+        self.location.player = self
 
     def moveLeft(self):
         if not self.location.left:
@@ -44,7 +44,7 @@ class Player:
             return False
         self.location.player = None
         self.location = self.location.left
-        self.location.player = player
+        self.location.player = self
 
     def moveRight(self):
         if not self.location.right:
@@ -52,12 +52,12 @@ class Player:
             return False
         self.location.player = None
         self.location = self.location.right
-        self.location.player = player
+        self.location.player = self
 
 
 
 def printFail():
-    print("The was is obstructed in this direction")
+    print("The way is obstructed in this direction")
 
 
 def getRandomName():

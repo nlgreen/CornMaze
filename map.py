@@ -4,6 +4,8 @@ Written 10-20-2016 by Nathaniel Green
 A map is a collection of sidelength^2 Nodes
 
 TODO: Input checking
+      Players can't spawn on top of each other
+      Players can occupy the same square?
 '''
 
 from random import randint
@@ -146,9 +148,11 @@ class Map:
         i = randint(0,self.sidelength - 1)
         j = randint(0,self.sidelength - 1)
 
-        player = player.Player(player.getRandomName())
-        player.location = self.nodelist[i][j]
-        self.nodelist[i][j] = player
+        thePlayer = player.Player(player.getRandomName())
+        thePlayer.location = self.nodelist[i][j]
+        self.nodelist[i][j].player = thePlayer
+
+        return thePlayer
 
     # Draw the map in tkinter
     def draw(self):
