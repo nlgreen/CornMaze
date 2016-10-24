@@ -1,3 +1,14 @@
+'''
+
+Written on 10-23-2016 by Nathaniel Green
+
+A player class for a CornMaze game. A player has a
+name, an amount of bullets left to shoot, and a location
+on the map in the form of a node it is attached to
+
+'''
+
+
 from direction import Direction as Direct
 from random import choice
 
@@ -9,6 +20,8 @@ class Player:
         self.location = None
         self.name = name
 
+    # a bullet travels until it hits a player (including the shooter)
+    # or a wall, in which case it stops
     def shoot(self,direction):
         node = self.location
         while node.getNeighbor(direction):
@@ -16,7 +29,8 @@ class Player:
             if node.hasPlayer():
                 thePlayer = node.getPlayer()
                 thePlayer.die()
-    
+
+    # when a player dies
     def die(self):
         print("Player: {} has died!".format(self.name))
 

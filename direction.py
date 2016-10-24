@@ -1,3 +1,11 @@
+'''
+Written on 10-23-2016 by Nathaniel Green
+
+A direction Enum class for a CornMaze game
+
+'''
+
+
 from enum import Enum
 from random import choice
 

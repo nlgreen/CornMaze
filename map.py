@@ -144,6 +144,7 @@ class Map:
                 node.valid = False
 
 
+    # Set a random player on the map, attach it to the node, and return the player
     def setRandomPlayer(self):
         i = randint(0,self.sidelength - 1)
         j = randint(0,self.sidelength - 1)

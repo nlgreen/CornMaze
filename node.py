@@ -14,13 +14,17 @@ from direction import Direction as Direct
 
 class Node:
     def __init__(self):
+
+        # list of nodes this node is connected to
         self.top = None
         self.bottom = None
         self.right = None
         self.left = None
 
+        # used in checking that the node can be accessed
         self.valid = False
 
+        # A node might have a player attached to it
         self.player = None
     
     def __str__(self):
@@ -46,6 +50,7 @@ class Node:
             print("Incorrect set number")
 
 
+    # retrieve just one neighbor in a specified direction
     def getNeighbor(self,direction):
         if direction == Direct.TOP:
             return self.top
@@ -57,6 +62,7 @@ class Node:
             return self.right
 
 
+    # retrieve all neighbors in a list
     def getNeighbors(self):
         neighbors = []
 
@@ -72,12 +78,14 @@ class Node:
         return neighbors
         
 
+
     def hasPlayer(self):
         return bool(self.player)
 
     def getPlayer(self):
         return self.player
-    
+
+    # attach a player to this node
     def addPlayer(self,thePlayer):
         self.player = thePlayer
 
