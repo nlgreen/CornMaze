@@ -195,10 +195,10 @@ class Map:
         d = Button(master,text="Down",command=down)
         l = Button(master,text="Left",command=left)
         r = Button(master,text="Right",command=right)
-        u.pack()
-        d.pack()
-        l.pack()
-        r.pack()
+        u.pack(side = TOP)
+        d.pack(side = BOTTOM)
+        l.pack(side = LEFT)
+        r.pack(side = RIGHT)
 
         
         height = 10
