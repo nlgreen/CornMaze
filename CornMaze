@@ -2,7 +2,7 @@
 
 
 import map
-
+import view
 
 def main():
     theMap = map.Map()
@@ -10,7 +10,10 @@ def main():
     theMap.setWalls(25)
     theMap.verify()
     p1 = theMap.setRandomPlayer()
-    theMap.draw()
+    
+    theView = view.View(theMap,p1)
+    
+    theView.draw()
 
 
 
