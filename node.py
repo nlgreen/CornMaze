@@ -27,6 +27,9 @@ class Node:
 
         # A node might have a player attached to it
         self.player = None
+
+        self.p1visit = False
+        self.p2visit = False
     
     def __str__(self):
         return "Node"
@@ -78,7 +81,18 @@ class Node:
 
         return neighbors
         
+    def setVisited(self,thePlayer):
+        if thePlayer.number == 1:
+            self.p1visit = True
+        else:
+            self.p2visit = True
 
+    def hasVisited(self,thePlayer):
+        if thePlayer.number == 1:
+            return self.p1visit
+        else:
+            return self.p2visit
+    
 
     def hasPlayer(self):
         return bool(self.player)

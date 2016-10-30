@@ -15,10 +15,11 @@ from random import choice
 
 class Player:
     
-    def __init__(self,name):
+    def __init__(self,name,number=1):
         self.bullets = 2
         self.location = None
         self.name = name
+        self.number = number
 
     # a bullet travels until it hits a player (including the shooter)
     # or a wall, in which case it stops
@@ -43,6 +44,7 @@ class Player:
         self.location.player = None
         self.location = self.location.top
         self.location.player = self
+        self.location.setVisited(self)
         return True
 
     def moveDown(self):
@@ -52,6 +54,7 @@ class Player:
         self.location.player = None
         self.location = self.location.bottom
         self.location.player = self
+        self.location.setVisited(self)
         return True
         
     def moveLeft(self):
@@ -61,6 +64,7 @@ class Player:
         self.location.player = None
         self.location = self.location.left
         self.location.player = self
+        self.location.setVisited(self)
         return True
         
     def moveRight(self):
@@ -70,6 +74,7 @@ class Player:
         self.location.player = None
         self.location = self.location.right
         self.location.player = self
+        self.location.setVisited(self)
         return True
 
 

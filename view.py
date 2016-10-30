@@ -66,7 +66,14 @@ class View:
         for row in self.theMap.nodelist:
             width = 10
             for node in row:
-                if not node:
+
+                if node.player:
+                    w.create_oval(width,height,width+100,height+100)
+                    w.create_text(width + 50, height + 50, text=node.player.name)
+                    w.create_text(width + 50, height + 90, text="p" + str(node.player.number))
+                
+                
+                if not node or not node.hasVisited(thePlayer):
                     continue
                 if not node.top:
                     w.create_line(width,height,width+100,height)
@@ -77,11 +84,7 @@ class View:
                 if not node.right:
                     w.create_line(width+100,height,width+100,height+100)
 
-                if node.player:
-                    w.create_oval(width,height,width+100,height+100)
-
-                if node.player:
-                    w.create_text(width + 50, height + 50, text=node.player.name)
+                
                     
                 width += 100
             height += 100

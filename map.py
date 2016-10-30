@@ -153,10 +153,12 @@ class Map:
         thePlayer = player.Player(player.getRandomName())
         thePlayer.location = self.nodelist[i][j]
         self.nodelist[i][j].player = thePlayer
-
+        self.nodelist[i][j].setVisited(thePlayer)
+        
         if playerNum == 1:
             self.player1 = thePlayer
         else:
+            thePlayer.number = 2
             self.player2 = thePlayer
         
         return thePlayer
