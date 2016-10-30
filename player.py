@@ -78,4 +78,4 @@ def printFail():
 
 
 def getRandomName():
-    return choice(["Abby","Brandon","Carlie","Dale","Ellen","Frederick"])
+    return choice(["Abby","Brandon","Carla","Dale","Ellen","Frederick","Gale","Harry","Ira"])

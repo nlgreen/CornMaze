@@ -9,9 +9,10 @@ def main():
     theMap.init()
     theMap.setWalls(25)
     theMap.verify()
-    p1 = theMap.setRandomPlayer()
+    p1 = theMap.setRandomPlayer(1)
+    p2 = theMap.setRandomPlayer(2)
     
-    theView = view.View(theMap,p1)
+    theView = view.View(theMap,p1,p2)
     
     theView.draw()
 

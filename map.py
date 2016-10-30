@@ -18,7 +18,8 @@ class Map:
         # All nodes are initialized as None, to be replaced with Nodes
         self.nodelist = [[None for i in range(0,sidelength)] for j in range(0,sidelength)]
         self.sidelength = sidelength
-        self.thePlayer = None
+        self.player1 = None
+        self.player2 = None
 
     def __str__(self):
         stringy = ""
@@ -145,15 +146,18 @@ class Map:
 
 
     # Set a random player on the map, attach it to the node, and return the player
-    def setRandomPlayer(self):
+    def setRandomPlayer(self,playerNum):
         i = randint(0,self.sidelength - 1)
         j = randint(0,self.sidelength - 1)
 
         thePlayer = player.Player(player.getRandomName())
         thePlayer.location = self.nodelist[i][j]
         self.nodelist[i][j].player = thePlayer
-        self.thePlayer = thePlayer
 
+        if playerNum == 1:
+            self.player1 = thePlayer
+        else:
+            self.player2 = thePlayer
         
         return thePlayer
 

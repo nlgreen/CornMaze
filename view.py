@@ -2,9 +2,12 @@ from tkinter import *
 
 
 class View:
-    def __init__(self,theMap,thePlayer):
+    def __init__(self,theMap,player1,player2):
         self.theMap = theMap
-        self.thePlayer = thePlayer
+        self.player1 = player1
+        self.player2 = player2
+
+        self.turn = 1
 
 
     # Draw the map in tkinter
@@ -12,8 +15,8 @@ class View:
 
         master = Tk()
 
-        canvas_width = self.sidelength * 100 + 20
-        canvas_height = self.sidelength * 100 + 20
+        canvas_width = self.theMap.sidelength * 100 + 20
+        canvas_height = self.theMap.sidelength * 100 + 20
 
         w = Canvas(master,
                    width = canvas_width,
@@ -23,21 +26,28 @@ class View:
         w.pack()
 
 
+        thePlayer = self.player1 if self.turn is 1 else self.player2
+        
+
         def up():
-            if self.thePlayer.moveUp():
+            if thePlayer.moveUp():
                 master.destroy()
+                self.turn *= -1
                 self.draw()
         def down():
-            if self.thePlayer.moveDown():
+            if thePlayer.moveDown():
                 master.destroy()
+                self.turn *= -1
                 self.draw()
         def left():
-            if self.thePlayer.moveLeft():
+            if thePlayer.moveLeft():
                 master.destroy()
+                self.turn *= -1
                 self.draw()
         def right():
-            if self.thePlayer.moveRight():
+            if thePlayer.moveRight():
                 master.destroy()
+                self.turn *= -1
                 self.draw()
             
         u = Button(master,text="Up",command=up)
@@ -70,6 +80,9 @@ class View:
                 if node.player:
                     w.create_oval(width,height,width+100,height+100)
 
+                if node.player:
+                    w.create_text(width + 50, height + 50, text=node.player.name)
+                    
                 width += 100
             height += 100
 
